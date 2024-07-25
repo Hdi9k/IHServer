@@ -40,6 +40,8 @@ public class UserServiceImpl implements UserService {
         if(userInfo.getUsername()==null)userInfo.setUsername("用户" + (new Random().nextInt(90000) + 10000));
         if(userInfo.getLoginStatus()==null)userInfo.setLoginStatus(false);
         userMapper.insertUser(userInfo);
+        UserInterest userInterest=new UserInterest();
+        userInterestMapper.insertUserInter(userInfo.getUserId(),userInterest);
         return Result.success();
     }
 
@@ -104,7 +106,6 @@ public class UserServiceImpl implements UserService {
         }else {
             return Result.error("帖子只能被发帖人删除");
         }
-
     }
 
     @Override
